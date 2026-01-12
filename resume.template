@@ -3,118 +3,200 @@
 
 # {{name}}
 
-{{#if picture}}![Profile Picture]({{{picture}}}){{/if}}
+{{#if label}}**{{label}}**{{/if}}
+
+{{#if image}}![Profile Picture]({{{image}}}){{/if}}
 
 ## Contact
 
-{{#if email}}Email: [{{email}}](mailto:{{email}})  {{/if}}
-{{#if website}}Website: [{{{website}}}]({{{website}}})  {{/if}}
-{{#if phone}}Phone: {{phone}}  {{/if}}
-{{#if location.address}}Address: {{location.address}}  {{/if}}
-{{#if location.city}}City: {{location.city}}  {{/if}}
-{{#if location.postalCode}}Postal Code: {{location.postalCode}}  {{/if}}
-{{#if location.countryCode}}Country: {{location.countryCode}}  {{/if}}
-{{#if location.region}}Country: {{location.region}}  {{/if}}
+{{#if email}}**Email:** [{{email}}](mailto:{{email}})  {{/if}}
+{{#if url}}**Website:** [{{{url}}}]({{{url}}})  {{/if}}
+{{#if phone}}**Phone:** {{phone}}  {{/if}}
+{{#if location}}{{#if location.address}}**Address:** {{location.address}}{{#if location.city}}, {{/if}}{{/if}}{{#if location.postalCode}}{{location.postalCode}} {{/if}}{{#if location.city}}{{location.city}}{{/if}}{{#if location.region}}{{#if location.city}}, {{/if}}{{location.region}}{{/if}}{{#if location.countryCode}} ({{location.countryCode}}){{/if}}  {{/if}}
 
-{{#if profiles}}## Profiles{{/if}}
+{{#if profiles}}## Profiles
 
 {{#each profiles}}
-{{#if url}}[{{network}}{{#if username}} - {{username}}{{/if}}]({{{url}}})  {{^}}{{network}}{{#if username}} - {{username}}{{/if}}  {{/if}}
-{{/each}}
-
-{{#if summary}}## Summary
-
-{{summary}}{{/if}}
-{{/basics}}
-
-{{#if work}}## Work
-
-{{#each work}}
-### {{position}}{{#if company}}, {{#if website}}[{{company}}]({{{website}}}){{^}}{{company}}{{/if}}{{/if}}
-##### {{startDate}} {{#if endDate}}- {{endDate}}{{/if}}
-
-{{#each highlights}}
-* {{.}}
-{{/each}}
-
-{{summary}}
-
+{{#if url}}[{{#if network}}{{network}}{{^}}{{username}}{{/if}}{{#if username}}{{#if network}} - {{username}}{{/if}}{{/if}}]({{{url}}})  
+{{^}}{{#if network}}{{network}}{{/if}}{{#if username}}{{#if network}} - {{/if}}{{username}}{{/if}}  
+{{/if}}
 {{/each}}
 {{/if}}
 
-{{#if volunteer}}## Volunteer
+{{#if summary}}## Summary
 
-{{#each volunteer}}
-### {{position}}{{#if organization}}, {{#if website}}[{{organization}}]({{{website}}}){{^}}{{organization}}{{/if}}{{/if}}
-##### {{startDate}} {{#if endDate}}- {{endDate}}{{/if}}
+{{summary}}
+{{/if}}
+{{/basics}}
 
+{{#if work}}## Work Experience
+
+{{#each work}}
+### {{position}}{{#if name}}, {{#if url}}[{{name}}]({{{url}}}){{^}}{{name}}{{/if}}{{/if}}
+{{#if location}}**Location:** {{location}}  {{/if}}
+{{#if startDate}}**Period:** {{startDate}}{{#if endDate}} - {{endDate}}{{^}} - Present{{/if}}  {{/if}}
+
+{{#if summary}}{{summary}}
+
+{{/if}}
+{{#if description}}_{{description}}_
+
+{{/if}}
+{{#if highlights}}**Highlights:**
 {{#each highlights}}
 * {{.}}
 {{/each}}
 
-{{summary}}
+{{/if}}
+{{/each}}
+{{/if}}
 
+{{#if volunteer}}## Volunteer Experience
+
+{{#each volunteer}}
+### {{position}}{{#if organization}}, {{#if url}}[{{organization}}]({{{url}}}){{^}}{{organization}}{{/if}}{{/if}}
+{{#if location}}**Location:** {{location}}  {{/if}}
+{{#if startDate}}**Period:** {{startDate}}{{#if endDate}} - {{endDate}}{{^}} - Present{{/if}}  {{/if}}
+
+{{#if summary}}{{summary}}
+
+{{/if}}
+{{#if highlights}}**Highlights:**
+{{#each highlights}}
+* {{.}}
+{{/each}}
+
+{{/if}}
 {{/each}}
 {{/if}}
 
 {{#if education}}## Education
 
 {{#each education}}
-### {{institution}}{{#if studyType}} - {{studyType}}{{/if}}{{#if area}} in {{area}}{{/if}}
-##### {{startDate}} {{#if endDate}}- {{endDate}}{{/if}}
-{{#if gpa}}GPA: {{gpa}}{{/if}}
+### {{#if studyType}}{{studyType}}{{#if area}} in {{area}}{{/if}}{{^}}{{#if area}}{{area}}{{/if}}{{/if}}{{#if institution}} - {{#if url}}[{{institution}}]({{{url}}}){{^}}{{institution}}{{/if}}{{/if}}
+{{#if location}}**Location:** {{location}}  {{/if}}
+{{#if startDate}}**Period:** {{startDate}}{{#if endDate}} - {{endDate}}{{^}} - Present{{/if}}  {{/if}}
+{{#if score}}**Score:** {{score}}{{/if}}{{#if gpa}}**GPA:** {{gpa}}{{/if}}
+
+{{#if summary}}{{summary}}
+
+{{/if}}
+{{#if courses}}**Courses:**
 {{#each courses}}
 * {{.}}
 {{/each}}
 
+{{/if}}
 {{/each}}
 {{/if}}
 
 {{#if awards}}## Awards
 
 {{#each awards}}
-### {{title}}{{#if awarder}} from {{awarder}}{{/if}}{{#if date}} on {{date}}{{/if}}
+### {{title}}{{#if awarder}} - {{awarder}}{{/if}}
+{{#if date}}**Date:** {{date}}  {{/if}}
 
-{{summary}}
+{{#if summary}}{{summary}}
 
+{{/if}}
+{{/each}}
+{{/if}}
+
+{{#if certificates}}## Certificates
+
+{{#each certificates}}
+### {{#if url}}[{{name}}]({{{url}}}){{^}}{{name}}{{/if}}{{#if issuer}} - {{issuer}}{{/if}}
+{{#if date}}**Date:** {{date}}  {{/if}}
+
+{{#if summary}}{{summary}}
+
+{{/if}}
 {{/each}}
 {{/if}}
 
 {{#if publications}}## Publications
 
 {{#each publications}}
-### {{#if website}}[{{name}}{{#if publisher}} - {{publisher}}{{/if}}]({{{website}}}){{^}}{{name}}{{#if publisher}} - {{publisher}}{{/if}}{{/if}}
+### {{#if url}}[{{name}}]({{{url}}}){{^}}{{name}}{{/if}}{{#if publisher}} - {{publisher}}{{/if}}
+{{#if releaseDate}}**Published:** {{releaseDate}}  {{/if}}
 
-{{summary}}
+{{#if summary}}{{summary}}
 
+{{/if}}
+{{/each}}
+{{/if}}
+
+{{#if projects}}## Projects
+
+{{#each projects}}
+### {{#if url}}[{{name}}]({{{url}}}){{^}}{{name}}{{/if}}{{#if type}} ({{type}}){{/if}}
+{{#if entity}}**Entity:** {{entity}}  {{/if}}
+{{#if startDate}}**Period:** {{startDate}}{{#if endDate}} - {{endDate}}{{^}} - Present{{/if}}  {{/if}}
+{{#if roles}}**Roles:** {{#each roles}}{{.}}{{#unless @last}}, {{/unless}}{{/each}}  {{/if}}
+
+{{#if description}}{{description}}
+
+{{/if}}
+{{#if highlights}}**Highlights:**
+{{#each highlights}}
+* {{.}}
+{{/each}}
+
+{{/if}}
+{{#if keywords}}**Keywords:** {{#each keywords}}{{.}}{{#unless @last}}, {{/unless}}{{/each}}
+
+{{/if}}
 {{/each}}
 {{/if}}
 
 {{#if skills}}## Skills
 
 {{#each skills}}
-* {{#if level}}{{level}} in {{/if}}{{name}}{{#if keywords}} ({{commaSeparated keywords}}){{/if}}
+### {{name}}{{#if level}} ({{level}}){{/if}}
+{{#if keywords}}
+{{#each keywords}}* {{.}}
+{{/each}}
+{{/if}}
+
 {{/each}}
 {{/if}}
 
 {{#if languages}}## Languages
 
 {{#each languages}}
-* {{#if fluency}}{{fluency}} in {{/if}}{{language}}
+* {{language}}{{#if fluency}} - {{fluency}}{{/if}}
 {{/each}}
 {{/if}}
 
 {{#if interests}}## Interests
 
 {{#each interests}}
-* {{name}}{{#if keywords}} ({{commaSeparated keywords}}){{/if}}
+### {{name}}
+{{#if keywords}}
+{{#each keywords}}* {{.}}
+{{/each}}
+{{/if}}
+
 {{/each}}
 {{/if}}
 
 {{#if references}}## References
 
 {{#each references}}
-> {{reference}} -- <cite>{{name}}</cite>
+### {{name}}{{#if title}}, {{title}}{{/if}}{{#if company}} at {{company}}{{/if}}
+{{#if email}}**Email:** [{{email}}](mailto:{{email}})  {{/if}}
+{{#if phone}}**Phone:** {{phone}}  {{/if}}
+{{#if linkedin}}**LinkedIn:** [{{{linkedin}}}]({{{linkedin}}})  {{/if}}
+
+{{#if reference}}{{reference}}
+
+{{/if}}
 {{/each}}
+{{/if}}
+
+{{#if meta}}
+---
+
+{{#if meta.lastModified}}_Last updated: {{meta.lastModified}}_{{/if}}
 {{/if}}
 {{/resume}}
